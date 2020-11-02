@@ -1,3 +1,5 @@
+import { User } from './User';
+import is from 'is_js';
 
 export class SuperUser extends User {
     constructor(name, surname) {

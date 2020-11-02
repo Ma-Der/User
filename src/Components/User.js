@@ -1,3 +1,7 @@
+import moment from 'moment';
+import is from 'is_js';
+
+
 export class User {
     constructor(name, surname) {
         this.name = name;

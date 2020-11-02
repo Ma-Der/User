@@ -1,4 +1,5 @@
-
+import { User } from './Components/User';
+import { SuperUser } from './Components/Superuser';
 
 const user = new User("Tom", "TommyGun");
 const superUser = new SuperUser("Mike", "Molek");
