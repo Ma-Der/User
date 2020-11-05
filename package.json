@@ -2,7 +2,7 @@
   "name": "user",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "is_js": "^0.9.0",
     "moment": "^2.29.1",

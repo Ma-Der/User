@@ -1,6 +1,80 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/Components/Misc.js":
+/*!********************************!*\
+  !*** ./src/Components/Misc.js ***!
+  \********************************/
+/*! namespace exports */
+/*! export Misc [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Misc": () => /* binding */ Misc
+/* harmony export */ });
+/* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is_js */ "./node_modules/is_js/is.js");
+/* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
+
+class Misc {
+  constructor() {}
+
+  static passwordCheck(pass) {
+    var re = /(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()]).{8,}/;
+    is_js__WEBPACK_IMPORTED_MODULE_0___default().setRegexp(re, 'alphaNumeric');
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().not.alphaNumeric(pass)) throw new Error("Password should have at least: 8 digits, one uppercase letter, one number, one special-sign.");
+  }
+
+  static genderCheck(gender) {
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().empty(gender)) throw new Error('Empty string, choose "m" for male or "f" for female.');
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().falsy(is_js__WEBPACK_IMPORTED_MODULE_0___default().equal('m', gender) || is_js__WEBPACK_IMPORTED_MODULE_0___default().equal('f', gender))) throw new Error("m - stands for male, f - stands for female");
+    var gen = ['male', 'female'];
+
+    switch (gender) {
+      case 'm':
+        this.gender = gen[0];
+        return this;
+
+      case 'f':
+        this.gender = gen[1];
+        return this;
+    }
+  }
+
+  static dateCheck(input) {
+    if (!input) throw new Error("Argument is missing.");
+
+    switch (true) {
+      case typeof input === 'number':
+        if (isNaN(input)) throw new Error("Input should be a number.");
+        if (moment__WEBPACK_IMPORTED_MODULE_1___default()().dayOfYear(input) > moment__WEBPACK_IMPORTED_MODULE_1___default()()) throw new Error("You will be born in a future. Please choose a negative number if you know how many days past since you were born.");
+        if (moment__WEBPACK_IMPORTED_MODULE_1___default()().dayOfYear(input).year() < 1900) throw new Error("You can't be that old.");
+        var num = moment__WEBPACK_IMPORTED_MODULE_1___default()().dayOfYear(input);
+        return num.format('MM/DD/YYYY');
+
+      case typeof input === 'string':
+        if (moment__WEBPACK_IMPORTED_MODULE_1___default()(input).format('MM/DD/YYYY') === 'Invalid date') throw new Error("Invalid date. Date format should be - MM/DD/YYYY");
+        if (moment__WEBPACK_IMPORTED_MODULE_1___default()(input).format('MM/DD/YYYY') > moment__WEBPACK_IMPORTED_MODULE_1___default()()) throw new Error("You will be born in a future. Please choose a correct date.");
+        if (moment__WEBPACK_IMPORTED_MODULE_1___default()(input).year() < 1900) throw new Error("You can't be that old.");
+        return moment__WEBPACK_IMPORTED_MODULE_1___default()(input).format('MM/DD/YYYY');
+
+      case moment__WEBPACK_IMPORTED_MODULE_1___default().isDate(input):
+        if (isNaN(input.getTime())) throw new Error("Invalid date.");
+        return moment__WEBPACK_IMPORTED_MODULE_1___default()(input).format('MM/DD/YYYY');
+        break;
+    }
+  }
+
+}
+
+/***/ }),
+
 /***/ "./src/Components/Superuser.js":
 /*!*************************************!*\
   !*** ./src/Components/Superuser.js ***!
@@ -22,18 +96,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class SuperUser extends _User__WEBPACK_IMPORTED_MODULE_0__.User {
-  constructor(name, surname) {
-    super(name, surname);
+  constructor(name, surname, password, email, birthDate, gender) {
+    super(name, surname, password, email, birthDate, gender);
     this.accessLevel = "admin";
   }
 
   changeUserEmail(user, email) {
-    if (!is_js__WEBPACK_IMPORTED_MODULE_1___default().object(user) && user instanceof _User__WEBPACK_IMPORTED_MODULE_0__.User) throw new Error("First argument should be an User Object.");
+    if (!(user instanceof _User__WEBPACK_IMPORTED_MODULE_0__.User)) throw new Error("First argument should be an User Object.");
     user.changeEmail(email);
   }
 
   changeUserPass(user, pass) {
-    if (!is_js__WEBPACK_IMPORTED_MODULE_1___default().object(user) && user instanceof _User__WEBPACK_IMPORTED_MODULE_0__.User) throw new Error("First argument should be an User Object.");
+    if (!(user instanceof _User__WEBPACK_IMPORTED_MODULE_0__.User)) throw new Error("First argument should be an User Object.");
     user.changePass(pass);
   }
 
@@ -56,30 +130,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "User": () => /* binding */ User
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! is_js */ "./node_modules/is_js/is.js");
-/* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(is_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! is_js */ "./node_modules/is_js/is.js");
+/* harmony import */ var is_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(is_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Misc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Misc */ "./src/Components/Misc.js");
 
 
 class User {
-  constructor(name, surname) {
+  constructor(name, surname, password, email, birthDate, gender) {
     this.name = name;
     this.surname = surname;
-    this.birthDate;
-    this.password;
-    this.gender;
-    this.email;
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().empty(this.name)) throw new Error('Name is empty. Please type your name.');
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().empty(this.surname)) throw new Error('Surname is empty. Please type your surname.');
+    this.birthDate = _Misc__WEBPACK_IMPORTED_MODULE_1__.Misc.dateCheck(birthDate);
+    this.password = password;
+    _Misc__WEBPACK_IMPORTED_MODULE_1__.Misc.passwordCheck(this.password);
+    this.gender = gender;
+    _Misc__WEBPACK_IMPORTED_MODULE_1__.Misc.genderCheck(this.gender);
+    this.email = email;
     this.accessLevel = "user";
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().empty(this.password) || is_js__WEBPACK_IMPORTED_MODULE_0___default().undefined(this.password)) throw new Error("Please set password for you.");
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().empty(this.email) || is_js__WEBPACK_IMPORTED_MODULE_0___default().undefined(this.email)) throw new Error("Please set your email address.");
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().not.email(this.email)) throw new Error("Invalid email.");
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().undefined(this.gender)) throw new Error("Please choose your gender - 'm' for male and 'f' for female.");
   }
 
   changeEmail(email) {
-    if (!is_js__WEBPACK_IMPORTED_MODULE_1___default().email(email)) throw new Error("Invalid email address.");
+    if (is_js__WEBPACK_IMPORTED_MODULE_0___default().not.email(email)) throw new Error("Invalid email address.");
     this.email = email;
     return this;
   }
 
   changePass(pass) {
+    _Misc__WEBPACK_IMPORTED_MODULE_1__.Misc.passwordCheck(pass);
     this.password = pass;
     return this;
   }
@@ -103,14 +185,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Superuser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Superuser */ "./src/Components/Superuser.js");
 
 
-var user = new _Components_User__WEBPACK_IMPORTED_MODULE_0__.User("Tom", "TommyGun");
-var superUser = new _Components_Superuser__WEBPACK_IMPORTED_MODULE_1__.SuperUser("Mike", "Molek");
+var user = new _Components_User__WEBPACK_IMPORTED_MODULE_0__.User('Tom', 'Seleck', "sdsadfF9*", 'sdsdsa@sds.pl', -12979, 'm');
+var superUser = new _Components_Superuser__WEBPACK_IMPORTED_MODULE_1__.SuperUser("Michelle", "Molek", "dsaffafKL&3", 'sdsd@sdsds.uk', new Date(1899), 'f');
 console.log(user);
 console.log(superUser);
-user.changeEmail("Tommy");
+console.log('-------------------------------------------------------------------------');
+user.changeEmail("Tommy@fdf.pl");
+superUser.changePass("tds@fdsDf3dsfd");
+superUser.changeUserPass(user, 'sasfafsafKFJJDAF*&^78');
 console.log(user);
-superUser.changeUserEmail(user, "tfdfdsfdsfdsfd");
-console.log(user);
+console.log(superUser);
 
 /***/ }),
 
