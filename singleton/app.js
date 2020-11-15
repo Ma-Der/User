@@ -1,8 +1,6 @@
- import { User } from './Components/User.js';
-import { SuperUser } from './Components/Superuser.js';
-import { ChatRoom } from './Components/ChatRoom.js';
-
-const chat = new ChatRoom();
+import { User } from './User.js';
+import { SuperUser } from './Superuser.js';
+import chat from './ChatRoom.js';
 
 const tom = new User('Tom', 'Seleck', "robotysatutajsdfdsadfF9*ffdf",'sdsdsa@sds.pl', -12979, 'm');
 const karen = new User("Karen", "Nowak", "fdfdfFdf*9sdd", "karen@wp.pl", new Date(1992), 'f');
