@@ -16,15 +16,15 @@ export class ChatRoom {
     changeUserPassword(user, password) {
         Misc.isInstanceValid(user, User);
         Misc.isUserInChatroom(user, this.userList);
-        Misc.passwordCheck(password);
-        user.password = password;
+
+        user.changePassword();
     }
 
     changeUserEmail(user, email) {
         Misc.isInstanceValid(user, User);
         Misc.isUserInChatroom(user, this.userList);
-        if(is.not.email(email)) throw new Error("Invalid email.");
-        user.email = email;
+
+        user.changeEmail(email);
     }
 
     editUserPassword(superuser, user, password) {
@@ -34,8 +34,8 @@ export class ChatRoom {
         Misc.isUserInChatroom(superuser, this.userList);        
         Misc.isUserInChatroom(user, this.userList);
                
-        const supUser = this.userList.filter(superusr => superusr.id === superuser.id).reduce((acc, el) => acc = el, {});
-        const usr = this.userList.filter(usr => usr.id === user.id).reduce((acc, el) => acc = el, {});
+        const [supUser] = this.userList.filter(superusr => superusr.id === superuser.id)
+        const [usr] = this.userList.filter(usr => usr.id === user.id)
 
         Misc.isSuperuser(supUser);
         Misc.isNormalUser(usr);

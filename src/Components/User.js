@@ -18,4 +18,14 @@ export class User {
         this.email = email;
         this.accessLevel = "user";
     }
+
+    changePassword(password){
+        Misc.passwordCheck(password);
+        this.password = password;
+    }
+
+    changeEmail(email) {
+        if(is.not.email(email)) throw new Error("Invalid email.");
+        this.email = email;
+    }
 }
